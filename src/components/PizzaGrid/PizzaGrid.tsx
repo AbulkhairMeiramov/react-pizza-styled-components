@@ -14,16 +14,19 @@ const StyledPizzaGrid = styled.div`
 
 const PizzaGrid: React.FC = () => {
   const pizzas = useAppSelector((state) => state.pizzaSlice.pizzas);
+  const categoryId = useAppSelector((state) => state.pizzaSlice.categoryId);
   const dispatch = useAppDispatch();
 
+  const categoryParam = categoryId > 0 ? `category=${categoryId}` : "";
+
   useEffect(() => {
-    dispatch(getPizzas());
-  }, [dispatch]);
+    dispatch(getPizzas(categoryParam));
+  }, [dispatch, categoryParam]);
 
   return (
     <StyledPizzaGrid>
       {pizzas.map((pizza) => (
-        <PizzaItem data={pizza} />
+        <PizzaItem data={pizza} key={pizza.id} />
       ))}
     </StyledPizzaGrid>
   );

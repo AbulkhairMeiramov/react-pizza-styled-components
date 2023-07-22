@@ -15,22 +15,24 @@ export type PizzaType = {
 type InitialStateType = {
   pizzas: PizzaType[];
   status: boolean;
+  categoryId: number;
 };
 
 const initialState: InitialStateType = {
   pizzas: [],
   status: false,
+  categoryId: 0,
 };
 
 export const getPizzas = createAsyncThunk<
   PizzaType[],
-  undefined,
+  string,
   { rejectValue: string }
->("PizzaSlice", async (_, { rejectWithValue }) => {
+>("PizzaSlice", async (category, { rejectWithValue }) => {
   try {
     const { data } = await axios.request({
       method: "GET",
-      url: "https://6322b272a624bced307cb4d9.mockapi.io/items",
+      url: `https://6322b272a624bced307cb4d9.mockapi.io/items?${category}`,
     });
     return data;
   } catch {
@@ -41,7 +43,11 @@ export const getPizzas = createAsyncThunk<
 const pizzaSlice = createSlice({
   name: "pizzaSlice",
   initialState,
-  reducers: {},
+  reducers: {
+    setCategoryId(state, action) {
+      state.categoryId = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getPizzas.fulfilled, (state, action) => {
       state.pizzas = action.payload;
@@ -56,6 +62,6 @@ const pizzaSlice = createSlice({
   },
 });
 
-export const {} = pizzaSlice.actions;
+export const { setCategoryId } = pizzaSlice.actions;
 
 export default pizzaSlice.reducer;

@@ -2,21 +2,26 @@ import { styled } from "styled-components";
 import PizzaTypeItem from "./PizzaTypeItem/PizzaTypeItem";
 
 const pizzaTypeMenuData = [
-  { name: "Все" },
+  { name: "Все", categoryId: 0 },
   {
     name: "Мясные",
+    categoryId: 1,
   },
   {
     name: "Вегетариянская",
+    categoryId: 2,
   },
   {
     name: "Гриль",
+    categoryId: 3,
   },
   {
     name: "Острые",
+    categoryId: 4,
   },
   {
     name: "Закрытые",
+    categoryId: 5,
   },
 ];
 
@@ -32,7 +37,7 @@ const PizzaTypeMenu: React.FC = () => {
   return (
     <StyledPizzaTypeMenu>
       {pizzaTypeMenuData.map((el, index) => (
-        <PizzaTypeItem key={index} data={el} />
+        <PizzaTypeItem key={index} data={el} index={index} />
       ))}
     </StyledPizzaTypeMenu>
   );
