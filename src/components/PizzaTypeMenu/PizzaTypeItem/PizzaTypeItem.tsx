@@ -38,8 +38,6 @@ const PizzaTypeItem: React.FC<PizzaTypeItemProps> = ({ data, index }) => {
   const dispatch = useAppDispatch();
   const categoryId = useAppSelector((state) => state.pizzaSlice.categoryId);
 
-  console.log(index);
-
   return (
     <StyledPizzaTypeItem
       onClick={() => dispatch(setCategoryId(data?.categoryId))}

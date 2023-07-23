@@ -15,13 +15,24 @@ const StyledPizzaGrid = styled.div`
 const PizzaGrid: React.FC = () => {
   const pizzas = useAppSelector((state) => state.pizzaSlice.pizzas);
   const categoryId = useAppSelector((state) => state.pizzaSlice.categoryId);
+  const activeSortType = useAppSelector(
+    (state) => state.pizzaSlice.activeSortType
+  );
   const dispatch = useAppDispatch();
 
   const categoryParam = categoryId > 0 ? `category=${categoryId}` : "";
+  const sortBy =
+    activeSortType.id === 0
+      ? "rating"
+      : activeSortType.id === 1
+      ? "price"
+      : activeSortType.id === 2
+      ? "title"
+      : "";
 
   useEffect(() => {
-    dispatch(getPizzas(categoryParam));
-  }, [dispatch, categoryParam]);
+    dispatch(getPizzas({ category: categoryParam, sortBy: sortBy }));
+  }, [dispatch, categoryParam, sortBy]);
 
   return (
     <StyledPizzaGrid>

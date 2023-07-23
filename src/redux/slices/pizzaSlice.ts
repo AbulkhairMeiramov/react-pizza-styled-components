@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { sortTypes } from "../../variables/constants";
 
 export type PizzaType = {
   id: string;
@@ -16,23 +17,25 @@ type InitialStateType = {
   pizzas: PizzaType[];
   status: boolean;
   categoryId: number;
+  activeSortType: { name: string; id: number };
 };
 
 const initialState: InitialStateType = {
   pizzas: [],
   status: false,
   categoryId: 0,
+  activeSortType: { name: sortTypes[0].name, id: sortTypes[0].id },
 };
 
 export const getPizzas = createAsyncThunk<
   PizzaType[],
-  string,
+  { category: string; sortBy: string },
   { rejectValue: string }
->("PizzaSlice", async (category, { rejectWithValue }) => {
+>("PizzaSlice", async ({ category, sortBy }, { rejectWithValue }) => {
   try {
     const { data } = await axios.request({
       method: "GET",
-      url: `https://6322b272a624bced307cb4d9.mockapi.io/items?${category}`,
+      url: `https://6322b272a624bced307cb4d9.mockapi.io/items?${category}&sortBy=${sortBy}`,
     });
     return data;
   } catch {
@@ -46,6 +49,9 @@ const pizzaSlice = createSlice({
   reducers: {
     setCategoryId(state, action) {
       state.categoryId = action.payload;
+    },
+    setActiveSortType(state, action) {
+      state.activeSortType = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -62,6 +68,6 @@ const pizzaSlice = createSlice({
   },
 });
 
-export const { setCategoryId } = pizzaSlice.actions;
+export const { setCategoryId, setActiveSortType } = pizzaSlice.actions;
 
 export default pizzaSlice.reducer;
