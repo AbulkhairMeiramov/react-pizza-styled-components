@@ -19,11 +19,19 @@ const StyledPizzaTypeItem = styled.div<StyledPizzaTypeItemProps>`
   padding: 13px 30px;
   cursor: pointer;
 
+  &:hover {
+    background-color: #c3c3c3;
+  }
+
   ${(props) =>
     props.index === props.categoryId &&
     `background-color: #fe5f1e;
     color: #fff;
-    border: 1px solid #000;`}
+    border: 1px solid #000;
+    
+    &:hover{
+      background-color: #FF7526;
+    }`}
 `;
 
 const PizzaTypeItem: React.FC<PizzaTypeItemProps> = ({ data, index }) => {
