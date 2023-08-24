@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
-import PizzaGrid from "../components/PizzaGrid/PizzaGrid";
-import PizzaSort from "../components/PizzaSort/PizzaSort";
-import PizzaTypeMenu from "../components/PizzaTypeMenu/PizzaTypeMenu";
+import PizzaGrid from "../../components/PizzaGrid/PizzaGrid";
+import PizzaSort from "../../components/PizzaSort/PizzaSort";
+import PizzaTypeMenu from "../../components/PizzaTypeMenu/PizzaTypeMenu";
 
 const StyledTopMenuContainer = styled.div`
   display: flex;

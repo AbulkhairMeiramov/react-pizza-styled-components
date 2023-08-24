@@ -13,7 +13,7 @@ export type PizzaType = {
   rating: number;
 };
 
-type InitialStateType = {
+export type InitialStateType = {
   pizzas: PizzaType[];
   status: boolean;
   categoryId: number;

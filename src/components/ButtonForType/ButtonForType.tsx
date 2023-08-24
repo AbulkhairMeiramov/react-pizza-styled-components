@@ -5,6 +5,7 @@ type ButtonForTypeProps = {
   width: string;
   height: string;
   active: boolean;
+  onClick: () => void;
 };
 
 export interface StyledButtonForTypeProps {
@@ -36,9 +37,15 @@ const ButtonForType: React.FC<ButtonForTypeProps> = ({
   width,
   height,
   active,
+  onClick,
 }) => {
   return (
-    <StyledButtonForType width={width} height={height} active={active}>
+    <StyledButtonForType
+      width={width}
+      height={height}
+      active={active}
+      onClick={onClick}
+    >
       {children}
     </StyledButtonForType>
   );

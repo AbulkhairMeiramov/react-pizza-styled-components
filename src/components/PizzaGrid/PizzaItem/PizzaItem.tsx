@@ -5,6 +5,7 @@ import { PizzaType } from "../../../redux/slices/pizzaSlice";
 import PizzaTypeSelection from "./PizzaTypeSelection/PizzaTypeSelection";
 import Button from "../../Button/Button";
 import PizzaPrice from "./PizzaPrice/PizzaPrice";
+import { useState } from "react";
 
 type PizzaItemProps = {
   data: PizzaType;
@@ -28,14 +29,28 @@ const SubmitContainer = styled.div`
 `;
 
 const PizzaItem: React.FC<PizzaItemProps> = ({ data }) => {
+  const [count, setCount] = useState(0);
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleAdd = async () => {
+    setCount((prev) => prev + 1);
+    setIsClicked(true);
+  };
+
   return (
     <StyledPizzaItem>
       <PizzaImg img={data.imageUrl} />
       <PizzaTitle title={data.title} />
-      <PizzaTypeSelection />
+      <PizzaTypeSelection data={data} />
       <SubmitContainer>
         <PizzaPrice price={data.price} />
-        <Button width="130px" height="40px">
+        <Button
+          onClick={handleAdd}
+          count={count}
+          width="130px"
+          height="40px"
+          isClicked={isClicked}
+        >
           Добавить
         </Button>
       </SubmitContainer>

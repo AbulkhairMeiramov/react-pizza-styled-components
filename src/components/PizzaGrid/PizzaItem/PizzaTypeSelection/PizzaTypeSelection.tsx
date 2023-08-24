@@ -1,5 +1,12 @@
 import { styled } from "styled-components";
 import ButtonForType from "../../../ButtonForType/ButtonForType";
+import { PizzaType } from "../../../../redux/slices/pizzaSlice";
+import { PIZZA_TYPE } from "../../../../variables/constants";
+import { useState } from "react";
+
+type PizzaTypeSelectionProps = {
+  data: PizzaType;
+};
 
 const StyledPizzaTypeSelection = styled.div`
   width: 100%;
@@ -17,27 +24,37 @@ const StyledPizzaTypeContainer = styled.div`
   padding: 5px;
 `;
 
-const PizzaTypeSelection: React.FC = () => {
+const PizzaTypeSelection: React.FC<PizzaTypeSelectionProps> = ({ data }) => {
+  const [activePizzaType, setActivePizzaType] = useState(0);
+  const [activePizzaSize, setActivePizzaSize] = useState(0);
+
   return (
     <StyledPizzaTypeSelection>
       <StyledPizzaTypeContainer>
-        <ButtonForType width="100px" height="30px" active={false}>
-          тонкое
-        </ButtonForType>
-        <ButtonForType width="100px" height="30px" active={true}>
-          традиционное
-        </ButtonForType>
+        {data?.types.map((type) => (
+          <ButtonForType
+            width="100px"
+            height="30px"
+            active={activePizzaType === type}
+            key={type}
+            onClick={() => setActivePizzaType(type)}
+          >
+            {PIZZA_TYPE[type]}
+          </ButtonForType>
+        ))}
       </StyledPizzaTypeContainer>
       <StyledPizzaTypeContainer>
-        <ButtonForType width="100px" height="30px" active={false}>
-          26см
-        </ButtonForType>
-        <ButtonForType width="100px" height="30px" active={true}>
-          30см
-        </ButtonForType>
-        <ButtonForType width="100px" height="30px" active={false}>
-          40см
-        </ButtonForType>
+        {data?.sizes.map((size, index) => (
+          <ButtonForType
+            width="100px"
+            height="30px"
+            active={activePizzaSize === index}
+            key={index}
+            onClick={() => setActivePizzaSize(index)}
+          >
+            {size} см
+          </ButtonForType>
+        ))}
       </StyledPizzaTypeContainer>
     </StyledPizzaTypeSelection>
   );

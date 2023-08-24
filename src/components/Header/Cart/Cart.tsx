@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import CartPrice from "./CartPrice/CartPrice";
 import CartCount from "./CartCount/CartCount";
+import { BsCart2 } from "react-icons/bs";
 
 const StyledCart = styled.div`
   min-width: 130px;
@@ -19,6 +20,7 @@ const StyledCart = styled.div`
 const Cart: React.FC = () => {
   return (
     <StyledCart>
+      <BsCart2 />
       <CartPrice>520 $</CartPrice>
       <div
         style={{

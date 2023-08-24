@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import Logo from "./Logo/Logo";
 import Cart from "./Cart/Cart";
+import LinkBase from "../LinkBase/LinkBase";
 
 const HeaderWrapper = styled.div`
   width: 100%;
@@ -12,8 +13,12 @@ const HeaderWrapper = styled.div`
 const Header: React.FC = () => {
   return (
     <HeaderWrapper>
-      <Logo />
-      <Cart />
+      <LinkBase to="/">
+        <Logo />
+      </LinkBase>
+      <LinkBase to="/cart">
+        <Cart />
+      </LinkBase>
     </HeaderWrapper>
   );
 };

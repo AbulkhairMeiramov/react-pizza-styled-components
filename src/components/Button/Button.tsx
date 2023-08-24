@@ -1,14 +1,18 @@
-import { styled } from "styled-components";
+import { css, keyframes, styled } from "styled-components";
 
 type ButtonProps = {
   children: React.ReactNode;
   width: string;
   height: string;
+  count: number;
+  onClick: () => void;
+  isClicked: boolean;
 };
 
 export interface StyledButtonProps {
   width: string;
   height: string;
+  isClicked: boolean;
 }
 
 const StyledAddCount = styled.div`
@@ -21,6 +25,18 @@ const StyledAddCount = styled.div`
   background-color: #fe5f1e;
   border-radius: 70%;
   color: #fff;
+`;
+
+const jumpAnimation = keyframes`
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px); /* Adjust the jump height as needed */
+  }
+  100% {
+    transform: translateY(0);
+  }
 `;
 
 const StyledButton = styled.button<StyledButtonProps>`
@@ -37,7 +53,11 @@ const StyledButton = styled.button<StyledButtonProps>`
   font-weight: 500;
   color: #fe5f1e;
   cursor: pointer;
-
+  ${(props) =>
+    props.isClicked &&
+    css`
+      animation: ${jumpAnimation} 0.5s ease-in-out forwards;
+    `}
   &:hover {
     background-color: #fe5f1e;
     color: #fff;
@@ -58,12 +78,24 @@ const Container = styled.div`
   gap: 5px;
 `;
 
-const Button: React.FC<ButtonProps> = ({ children, width, height }) => {
+const Button: React.FC<ButtonProps> = ({
+  children,
+  width,
+  height,
+  count,
+  onClick,
+  isClicked,
+}) => {
   return (
-    <StyledButton width={width} height={height}>
+    <StyledButton
+      isClicked={isClicked}
+      width={width}
+      height={height}
+      onClick={onClick}
+    >
       <Container>
         <div>{children}</div>
-        <StyledAddCount>1</StyledAddCount>
+        {count !== 0 && <StyledAddCount>{count}</StyledAddCount>}
       </Container>
     </StyledButton>
   );
