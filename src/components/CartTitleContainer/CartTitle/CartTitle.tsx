@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 
 type CartTitleProps = {
   children: React.ReactNode;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   fontSize: string;
   fontWeight: string;
   lineHeight?: string;

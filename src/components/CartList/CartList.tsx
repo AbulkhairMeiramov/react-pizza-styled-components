@@ -1,6 +1,8 @@
 import { styled } from "styled-components";
+import CartItem from "./CartItem/CartItem";
 
 const StyledCartList = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -12,9 +14,7 @@ const StyledCartList = styled.div`
 const CartList: React.FC = () => {
   return (
     <StyledCartList>
-      <div>Cart</div>
-      <div>Cart</div>
-      <div>Cart</div>
+      <CartItem />
     </StyledCartList>
   );
 };
