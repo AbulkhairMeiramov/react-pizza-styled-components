@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import CartItem from "./CartItem/CartItem";
+import { useAppSelector } from "../../hooks/reduxHooks";
 
 const StyledCartList = styled.div`
   width: 100%;
@@ -12,9 +13,13 @@ const StyledCartList = styled.div`
 `;
 
 const CartList: React.FC = () => {
+  const cart = useAppSelector((state) => state.cartSlice);
+
   return (
     <StyledCartList>
-      <CartItem />
+      {cart?.pizzaItems?.map((pizzaItem) => (
+        <CartItem cartData={pizzaItem} key={pizzaItem?.id} />
+      ))}
     </StyledCartList>
   );
 };

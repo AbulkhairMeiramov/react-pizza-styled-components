@@ -1,5 +1,15 @@
 import { styled } from "styled-components";
 import CartTitle from "../../../CartTitleContainer/CartTitle/CartTitle";
+import { useAppDispatch } from "../../../../hooks/reduxHooks";
+import {
+  CartPizzaItem,
+  addPizzaItem,
+  minusPizzaItem,
+} from "../../../../redux/slices/cartSlice";
+
+type CartCountProps = {
+  cartData: CartPizzaItem;
+};
 
 const StyledCartCount = styled.div`
   display: flex;
@@ -26,14 +36,34 @@ const ActionOfCount = styled.div`
   }
 `;
 
-const CartCount: React.FC = () => {
+const CartCount: React.FC<CartCountProps> = ({ cartData }) => {
+  const dispatch = useAppDispatch();
+
+  const handleAddCount = () => {
+    dispatch(
+      addPizzaItem({
+        id: cartData?.id,
+        title: cartData?.title,
+        price: cartData?.price,
+        imageUrl: cartData?.imageUrl,
+        type: cartData?.type,
+        size: cartData?.size,
+        count: cartData?.count,
+      })
+    );
+  };
+
+  const handleMinusCount = () => {
+    dispatch(minusPizzaItem(cartData?.id));
+  };
+
   return (
     <StyledCartCount>
-      <ActionOfCount>-</ActionOfCount>
+      <ActionOfCount onClick={() => handleMinusCount()}>-</ActionOfCount>
       <CartTitle color="#000" fontSize="22px" fontWeight="700">
-        2
+        {cartData.count}
       </CartTitle>
-      <ActionOfCount>+</ActionOfCount>
+      <ActionOfCount onClick={() => handleAddCount()}>+</ActionOfCount>
     </StyledCartCount>
   );
 };

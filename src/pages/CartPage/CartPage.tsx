@@ -4,6 +4,8 @@ import CartTitle from "../../components/CartTitleContainer/CartTitle/CartTitle";
 import CartTitleContainer from "../../components/CartTitleContainer/CartTitleContainer";
 import { BsFillCartFill } from "react-icons/bs";
 import { AiTwotoneDelete } from "react-icons/ai";
+import { useAppDispatch } from "../../hooks/reduxHooks";
+import { clearCart } from "../../redux/slices/cartSlice";
 
 const StyledCartPage = styled.div`
   display: flex;
@@ -15,6 +17,8 @@ const StyledCartPage = styled.div`
 `;
 
 const CartPage: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   return (
     <StyledCartPage>
       <CartTitleContainer>
@@ -39,6 +43,7 @@ const CartPage: React.FC = () => {
           justifyContent="center"
           alignItems="center"
           lineHeight="30px"
+          onClick={() => dispatch(clearCart())}
         >
           Очистить корзину
         </CartTitle>

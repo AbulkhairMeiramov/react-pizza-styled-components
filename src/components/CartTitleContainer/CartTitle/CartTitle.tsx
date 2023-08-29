@@ -11,6 +11,7 @@ type CartTitleProps = {
   color: string;
   hoverColor?: string;
   cursor?: string;
+  onClick?: () => void;
 };
 
 type StyledCartTitleProps = {
@@ -57,6 +58,7 @@ const CartTitle: React.FC<CartTitleProps> = ({
   color,
   hoverColor,
   cursor,
+  onClick,
 }) => {
   return (
     <StyledCartTitle
@@ -68,6 +70,7 @@ const CartTitle: React.FC<CartTitleProps> = ({
       color={color}
       hoverColor={hoverColor}
       cursor={cursor}
+      onClick={onClick}
     >
       {icon}
       {children}

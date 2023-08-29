@@ -3,6 +3,15 @@ import CartItemImg from "./CartItemImg/CartItemImg";
 import CartTitle from "../../CartTitleContainer/CartTitle/CartTitle";
 import CartCount from "./CartCount/CartCount";
 import { TiDelete } from "react-icons/ti";
+import {
+  CartPizzaItem,
+  deletePizzaItem,
+} from "../../../redux/slices/cartSlice";
+import { useAppDispatch } from "../../../hooks/reduxHooks";
+
+type CartItemProps = {
+  cartData: CartPizzaItem;
+};
 
 const StyledCartItem = styled.div`
   width: 100%;
@@ -31,10 +40,16 @@ const StyledTiDelete = styled(TiDelete)`
   }
 `;
 
-const CartItem: React.FC = () => {
+const CartItem: React.FC<CartItemProps> = ({ cartData }) => {
+  const dispatch = useAppDispatch();
+
+  const handleDeleteItem = (id: string) => {
+    dispatch(deletePizzaItem(id));
+  };
+
   return (
     <StyledCartItem>
-      <CartItemImg />
+      <CartItemImg img={cartData?.imageUrl} />
       <StyledCartItemTitleContainer>
         <CartTitle
           color="#000"
@@ -44,7 +59,7 @@ const CartItem: React.FC = () => {
           justifyContent="center"
           alignItems="center"
         >
-          Сырный цыпленок
+          {cartData?.title}
         </CartTitle>
         <CartTitle
           color="#8d8d8d"
@@ -53,10 +68,10 @@ const CartItem: React.FC = () => {
           justifyContent="center"
           alignItems="center"
         >
-          тонкое тесто, 26cм
+          {cartData?.type}, {cartData?.size}см
         </CartTitle>
       </StyledCartItemTitleContainer>
-      <CartCount />
+      <CartCount cartData={cartData} />
       <CartTitle
         color="#000"
         fontSize="22px"
@@ -64,9 +79,9 @@ const CartItem: React.FC = () => {
         justifyContent="center"
         alignItems="center"
       >
-        770$
+        {cartData?.price}$
       </CartTitle>
-      <StyledTiDelete />
+      <StyledTiDelete onClick={() => handleDeleteItem(cartData?.id)} />
     </StyledCartItem>
   );
 };
