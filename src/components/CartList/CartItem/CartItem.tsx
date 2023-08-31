@@ -47,6 +47,8 @@ const CartItem: React.FC<CartItemProps> = ({ cartData }) => {
     dispatch(deletePizzaItem(id));
   };
 
+  console.log(cartData?.count);
+
   return (
     <StyledCartItem>
       <CartItemImg img={cartData?.imageUrl} />
@@ -71,7 +73,7 @@ const CartItem: React.FC<CartItemProps> = ({ cartData }) => {
           {cartData?.type}, {cartData?.size}см
         </CartTitle>
       </StyledCartItemTitleContainer>
-      <CartCount cartData={cartData} />
+      <CartCount cartData={cartData} handleDeleteItem={handleDeleteItem} />
       <CartTitle
         color="#000"
         fontSize="22px"
@@ -79,7 +81,7 @@ const CartItem: React.FC<CartItemProps> = ({ cartData }) => {
         justifyContent="center"
         alignItems="center"
       >
-        {cartData?.price}$
+        {cartData?.price * cartData?.count}$
       </CartTitle>
       <StyledTiDelete onClick={() => handleDeleteItem(cartData?.id)} />
     </StyledCartItem>

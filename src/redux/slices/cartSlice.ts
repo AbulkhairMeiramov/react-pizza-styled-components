@@ -11,13 +11,13 @@ export type CartPizzaItem = {
 };
 
 export type InitialStateType = {
-  totalCount: number;
   pizzaItems: CartPizzaItem[];
+  totalPrice: number;
 };
 
 const initialState: InitialStateType = {
-  totalCount: 0,
   pizzaItems: [],
+  totalPrice: 0,
 };
 
 const cartSlice = createSlice({
@@ -33,6 +33,10 @@ const cartSlice = createSlice({
       } else {
         state.pizzaItems.push({ ...action.payload, count: 1 });
       }
+
+      state.totalPrice = state.pizzaItems.reduce((sum, el) => {
+        return el.price * el.count + sum;
+      }, 0);
     },
     minusPizzaItem(state, action) {
       const findPizzaItem = state.pizzaItems.find(
@@ -49,7 +53,7 @@ const cartSlice = createSlice({
     },
     clearCart(state) {
       state.pizzaItems = [];
-      state.totalCount = 0;
+      state.totalPrice = 0;
     },
   },
 });

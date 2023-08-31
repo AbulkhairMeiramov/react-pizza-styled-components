@@ -44,13 +44,14 @@ const PizzaItem: React.FC<PizzaItemProps> = ({ data }) => {
     const item: CartPizzaItem = {
       id: data?.id,
       title: data?.title,
-      count: count,
+      count: count + 1,
       imageUrl: data?.imageUrl,
       price: data?.price,
       size: data?.sizes[activePizzaSize],
       type: PIZZA_TYPE[activePizzaType],
     };
     dispatch(addPizzaItem(item));
+    console.log(item);
   };
 
   return (

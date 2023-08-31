@@ -9,6 +9,7 @@ import {
 
 type CartCountProps = {
   cartData: CartPizzaItem;
+  handleDeleteItem: (id: string) => void;
 };
 
 const StyledCartCount = styled.div`
@@ -36,7 +37,10 @@ const ActionOfCount = styled.div`
   }
 `;
 
-const CartCount: React.FC<CartCountProps> = ({ cartData }) => {
+const CartCount: React.FC<CartCountProps> = ({
+  cartData,
+  handleDeleteItem,
+}) => {
   const dispatch = useAppDispatch();
 
   const handleAddCount = () => {
@@ -59,7 +63,16 @@ const CartCount: React.FC<CartCountProps> = ({ cartData }) => {
 
   return (
     <StyledCartCount>
-      <ActionOfCount onClick={() => handleMinusCount()}>-</ActionOfCount>
+      <ActionOfCount
+        onClick={() => {
+          if (cartData?.count <= 1) {
+            handleDeleteItem(cartData?.id);
+          }
+          handleMinusCount();
+        }}
+      >
+        -
+      </ActionOfCount>
       <CartTitle color="#000" fontSize="22px" fontWeight="700">
         {cartData.count}
       </CartTitle>

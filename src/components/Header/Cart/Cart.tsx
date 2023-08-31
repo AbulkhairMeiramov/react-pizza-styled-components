@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import CartPrice from "./CartPrice/CartPrice";
 import CartCount from "./CartCount/CartCount";
 import { BsCart2 } from "react-icons/bs";
+import { useAppSelector } from "../../../hooks/reduxHooks";
 
 const StyledCart = styled.div`
   min-width: 130px;
@@ -18,10 +19,15 @@ const StyledCart = styled.div`
 `;
 
 const Cart: React.FC = () => {
+  const cart = useAppSelector((state) => state.cartSlice);
+  const totalCount = cart?.pizzaItems.reduce((sum, el) => {
+    return el.count + sum;
+  }, 0);
+
   return (
     <StyledCart>
       <BsCart2 />
-      <CartPrice>520 $</CartPrice>
+      <CartPrice>{cart?.totalPrice} $</CartPrice>
       <div
         style={{
           width: "1px",
@@ -29,7 +35,7 @@ const Cart: React.FC = () => {
           backgroundColor: "rgba(255, 255, 255, 0.25)",
         }}
       ></div>
-      <CartCount>3</CartCount>
+      <CartCount>{totalCount}</CartCount>
     </StyledCart>
   );
 };

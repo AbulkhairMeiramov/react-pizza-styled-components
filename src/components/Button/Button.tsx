@@ -2,17 +2,18 @@ import { css, keyframes, styled } from "styled-components";
 
 type ButtonProps = {
   children: React.ReactNode;
-  width: string;
-  height: string;
-  count: number;
+  width?: string;
+  height?: string;
+  count?: number;
   onClick: () => void;
-  isClicked: boolean;
+  isClicked?: boolean;
 };
 
 export interface StyledButtonProps {
-  width: string;
-  height: string;
-  isClicked: boolean;
+  width?: string;
+  height?: string;
+  isClicked?: boolean;
+  count?: number;
 }
 
 const StyledAddCount = styled.div`
@@ -54,10 +55,11 @@ const StyledButton = styled.button<StyledButtonProps>`
   color: #fe5f1e;
   cursor: pointer;
   ${(props) =>
-    props.isClicked &&
-    css`
-      animation: ${jumpAnimation} 0.5s ease-in-out forwards;
-    `}
+    props.isClicked
+      ? css`
+          animation: ${jumpAnimation} 0.5s ease-in-out forwards;
+        `
+      : ""}
   &:hover {
     background-color: #fe5f1e;
     color: #fff;
@@ -95,7 +97,7 @@ const Button: React.FC<ButtonProps> = ({
     >
       <Container>
         <div>{children}</div>
-        {count !== 0 && <StyledAddCount>{count}</StyledAddCount>}
+        {!!count && count !== 0 && <StyledAddCount>{count}</StyledAddCount>}
       </Container>
     </StyledButton>
   );
