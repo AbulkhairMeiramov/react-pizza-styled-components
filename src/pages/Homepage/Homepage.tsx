@@ -2,6 +2,8 @@ import { styled } from "styled-components";
 import PizzaGrid from "../../components/PizzaGrid/PizzaGrid";
 import PizzaSort from "../../components/PizzaSort/PizzaSort";
 import PizzaTypeMenu from "../../components/PizzaTypeMenu/PizzaTypeMenu";
+import { useAuth } from "../../hooks/useAuth";
+import { Navigate } from "react-router-dom";
 
 const StyledTopMenuContainer = styled.div`
   display: flex;
@@ -10,7 +12,9 @@ const StyledTopMenuContainer = styled.div`
 `;
 
 const Homepage: React.FC = () => {
-  return (
+  const { isAuth } = useAuth();
+
+  return isAuth ? (
     <>
       <StyledTopMenuContainer>
         <PizzaTypeMenu />
@@ -18,6 +22,8 @@ const Homepage: React.FC = () => {
       </StyledTopMenuContainer>
       <PizzaGrid />
     </>
+  ) : (
+    <Navigate to={"/login"} />
   );
 };
 

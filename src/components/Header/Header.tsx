@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 import Logo from "./Logo/Logo";
 import Cart from "./Cart/Cart";
-import LinkBase from "../LinkBase/LinkBase";
+import LinkBase from "../UI/LinkBase/LinkBase";
 
 const HeaderWrapper = styled.div`
   width: 100%;

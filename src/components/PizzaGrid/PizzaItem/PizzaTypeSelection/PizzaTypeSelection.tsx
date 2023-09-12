@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import ButtonForType from "../../../ButtonForType/ButtonForType";
+import ButtonForType from "../../../UI/ButtonForType/ButtonForType";
 import { PizzaType } from "../../../../redux/slices/pizzaSlice";
 import { PIZZA_TYPE } from "../../../../variables/constants";
 

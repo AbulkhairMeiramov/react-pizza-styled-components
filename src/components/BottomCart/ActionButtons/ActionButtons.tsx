@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
-import Button from "../../Button/Button";
-import LinkBase from "../../LinkBase/LinkBase";
+import Button from "../../UI/Button/Button";
+import LinkBase from "../../UI/LinkBase/LinkBase";
 
 const StyledActionButtons = styled.div`
   display: flex;

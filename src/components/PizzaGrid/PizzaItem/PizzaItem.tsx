@@ -3,7 +3,7 @@ import PizzaImg from "./PizzaImg/PizzaImg";
 import PizzaTitle from "./PizzaTitle/PizzaTitle";
 import { PizzaType } from "../../../redux/slices/pizzaSlice";
 import PizzaTypeSelection from "./PizzaTypeSelection/PizzaTypeSelection";
-import Button from "../../Button/Button";
+import Button from "../../UI/Button/Button";
 import PizzaPrice from "./PizzaPrice/PizzaPrice";
 import { useState } from "react";
 import { CartPizzaItem, addPizzaItem } from "../../../redux/slices/cartSlice";
